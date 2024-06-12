@@ -19,7 +19,7 @@ class JobController extends Controller
     public function index()
     {
 
-        $jobs = Job::latest()->get()->groupBy('featured');
+        $jobs = Job::latest()->with(['employer','tags'])->get()->groupBy('featured'); // eagerLoading unlike lazyLoading $jobs = Job::latest()->get()->groupBy('featured');
 
         return view('jobs.index', [
             'jobs' => $jobs[0], //first collection are non featured jobs
