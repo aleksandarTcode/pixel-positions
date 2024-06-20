@@ -13,6 +13,8 @@ class TagController extends Controller
     public function __invoke(Tag $tag)
     {
 
-        return view('results', ['jobs' => $tag->jobs]);
+        $jobs = $tag->jobs()->with(['employer', 'tags'])->get();
+
+        return view('results', ['jobs' => $jobs]);
     }
 }
